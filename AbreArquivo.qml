@@ -2,10 +2,15 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
+import Cpp_Elements 1.0
 
 
 Item {
     id: openFileView
+
+    CarregaArquivo {
+        id: carregaArquivo
+    }
 
     FileDialog {
         id: fileDialog
@@ -13,7 +18,7 @@ Item {
         folder: shortcuts.home
 
         onAccepted: {
-            console.log("You choose: " + fileDialog.fileUrls)
+            carregaArquivo.readFile(fileDialog.fileUrl)
         }
 
         onRejected: {
@@ -24,10 +29,29 @@ Item {
     Column {
 
         spacing: 30
+        width: parent.width
 
         anchors {
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
+        }
+
+        ScrollView {
+            id: scrollView
+            width: parent.width * 0.8
+            height: 240
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            background: Rectangle{
+                color: "light gray"
+            }
+
+
+            TextArea {
+                text: carregaArquivo.fileText
+                readOnly: true
+
+            }
         }
 
         Button {
@@ -35,12 +59,13 @@ Item {
 
             height: 50
             width: 200
+            anchors.horizontalCenter: parent.horizontalCenter
 
             background: Rectangle {
                 color: parent.hovered ? "light blue" : "light gray"
             }
 
-            text: "Abrir Arquivo"
+            text: (carregaArquivo.fileText.length === 0) ? "Abrir Arquivo" : "Mudar Arquivo"
             onClicked: {
                 fileDialog.open()
             }
@@ -53,13 +78,18 @@ Item {
 
             height: 50
             width: 200
+            anchors.horizontalCenter: parent.horizontalCenter
+
 
             background: Rectangle {
                 color: parent.hovered ? "gray" : "light gray"
             }
 
             text: "Voltar"
-            onClicked: myStackView.pop()
+            onClicked: {
+                carregaArquivo.clear()
+                myStackView.pop()
+            }
 
         }
     }

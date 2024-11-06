@@ -36,6 +36,8 @@ else()
     else()
         add_executable(JactoEx01
           ${PROJECT_SOURCES}
+          CarregaArquivo.h CarregaArquivo.cpp
+
         )
     endif()
 endif()

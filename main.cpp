@@ -1,5 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <memory>
+
+#include "CarregaArquivo.h"
 
 int main(int argc, char *argv[])
 {
@@ -7,11 +11,13 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
     app.setApplicationName("Exercício 01");
     app.setOrganizationName("Luis Oliveira");
 
-    QQmlApplicationEngine engine;
+    qmlRegisterType<CarregaArquivo>("Cpp_Elements", 1, 0, "CarregaArquivo");
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine,
