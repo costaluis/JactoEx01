@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <zmq.hpp>
+#include <zmq_addon.hpp>
 #include <map>
 
 class Mensageiro {
@@ -26,8 +27,6 @@ protected:
 
     virtual void startConnection() = 0;
     virtual void closeConnection() {_socket->close();};
-    virtual void sendMessage() = 0;
-    virtual void receiveMessage() = 0;
 
     inline static const std::map<transport_type, std::string_view> _transport_header_map = {
         {transport_type::tcp, "tcp://"},

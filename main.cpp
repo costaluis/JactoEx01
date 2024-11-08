@@ -3,6 +3,7 @@
 #include <QQmlContext>
 
 #include "CarregaArquivo.h"
+#include "EnviaComando.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Luis Oliveira");
 
     qmlRegisterType<CarregaArquivo>("Cpp_Elements", 1, 0, "CarregaArquivo");
+    qmlRegisterType<EnviaComando>("Cpp_Elements", 1, 0, "EnviaComando");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

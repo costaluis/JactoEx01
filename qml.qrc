@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>Principal.qml</file>
         <file>AbreArquivo.qml</file>
+        <file>TransmiteComando.qml</file>
     </qresource>
 </RCC>

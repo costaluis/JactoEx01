@@ -16,7 +16,7 @@ public:
     EnviaComando(QObject *parent = nullptr);
     ~EnviaComando();
 
-    Q_INVOKABLE void sendMessage() override;
+    Q_INVOKABLE void sendMessage();
 
 
 private:

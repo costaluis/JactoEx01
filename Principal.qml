@@ -2,7 +2,6 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 
-
 Item {
     id: mainView
 
@@ -19,6 +18,10 @@ Item {
             height: 50
             width: 200
 
+            background: Rectangle {
+                color: parent.hovered ? "gray" : "lightgray"
+            }
+
             text: "Abrir Arquivo"
             onClicked: {
                 myStackView.push("AbreArquivo.qml")
@@ -31,8 +34,12 @@ Item {
             height: 50
             width: 200
 
+            background: Rectangle {
+                color: parent.hovered ? "gray" : "lightgray"
+            }
+
             text: "Enviar Comando"
-            onClicked: myStackView.push(mainView)
+            onClicked: myStackView.push("TransmiteComando.qml")
         }
 
         Button {
@@ -42,7 +49,7 @@ Item {
             width: 200
 
             background: Rectangle {
-                color: parent.hovered ? "red" : "light gray"
+                color: parent.hovered ? "gray" : "light gray"
             }
 
             text: "Sair/Encerrar"

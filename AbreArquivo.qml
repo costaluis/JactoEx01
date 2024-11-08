@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.0
 import Cpp_Elements 1.0
 
-
 Item {
     id: openFileView
 
@@ -20,14 +19,9 @@ Item {
         onAccepted: {
             carregaArquivo.readFile(fileDialog.fileUrl)
         }
-
-        onRejected: {
-            console.log("Canceled")
-        }
     }
 
     Column {
-
         spacing: 30
         width: parent.width
 
@@ -46,11 +40,9 @@ Item {
                 color: "light gray"
             }
 
-
             TextArea {
                 text: carregaArquivo.fileText
                 readOnly: true
-
             }
         }
 
@@ -62,16 +54,14 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
 
             background: Rectangle {
-                color: parent.hovered ? "light blue" : "light gray"
+                color: parent.hovered ? "gray" : "light gray"
             }
 
             text: (carregaArquivo.fileText.length === 0) ? "Abrir Arquivo" : "Mudar Arquivo"
             onClicked: {
                 fileDialog.open()
             }
-
         }
-
 
         Button {
             id: bt02
@@ -90,8 +80,6 @@ Item {
                 carregaArquivo.clear()
                 myStackView.pop()
             }
-
         }
     }
-
 }

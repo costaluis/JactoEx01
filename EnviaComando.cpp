@@ -9,10 +9,17 @@ EnviaComando::~EnviaComando() {
 }
 
 void EnviaComando::startConnection() {
-    _socket->connect(Mensageiro::_transport_header_map.at(this->_transport_type).data() + std::string("/tmp/0"));
+    _socket->bind(Mensageiro::_transport_header_map.at(this->_transport_type).data() + std::string("/tmp/0"));
 }
 
 void EnviaComando::sendMessage() {
-    _socket->send(zmq::message_t{_topic}, zmq::send_flags::sndmore);
-    _socket->send(zmq::message_t{_msg}, zmq::send_flags::none);
+    const std::string topic_string = _topic.toStdString();
+    const std::string msg_string = _msg.toStdString();
+
+    std::array<zmq::const_buffer,2> send_msgs = {
+        zmq::const_buffer(topic_string.data(), topic_string.size()),
+        zmq::const_buffer(msg_string.data(), msg_string.size())
+    };
+
+    zmq::send_multipart(*_socket, send_msgs);
 }
